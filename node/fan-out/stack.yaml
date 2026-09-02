@@ -1,0 +1,16 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  fan-out:
+    lang: node24
+    handler: ./fan-out
+    image: ${REGISTRY:-ttl.sh}/${OWNER:-openfaas-examples}/node-fan-out:latest
+
+  url-check:
+    lang: node24
+    handler: ./url-check
+    image: ${REGISTRY:-ttl.sh}/${OWNER:-openfaas-examples}/node-url-check:latest
+    environment:
+      request_timeout: "5"
